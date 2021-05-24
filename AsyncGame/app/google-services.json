@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "758629607692",
+    "project_id": "async-game-200fa",
+    "storage_bucket": "async-game-200fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758629607692:android:92e9e219d84fac3a218129",
+        "android_client_info": {
+          "package_name": "com.example.asyncgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758629607692-q510peam8ruk9jif8o3ro5l0gu6eoqfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWpym5GV5i-y_QhET0aBs326eb5CFljvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758629607692-q510peam8ruk9jif8o3ro5l0gu6eoqfn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
