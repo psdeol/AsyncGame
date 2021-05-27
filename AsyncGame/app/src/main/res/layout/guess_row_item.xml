@@ -7,10 +7,26 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/hintGiver"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_textview"
+        android:gravity="center"
+        android:text="some_text"
+        app:layout_constraintEnd_toStartOf="@+id/hint"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="20dp"
+        />
+
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/hint_background"
+        android:gravity="center_vertical"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

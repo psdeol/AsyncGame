@@ -17,18 +17,25 @@ public class GuessAdapter extends RecyclerView.Adapter<GuessAdapter.ViewHolder> 
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private final TextView hintTextView;
+        private final TextView userTextView;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.textView);
+            hintTextView = (TextView) view.findViewById(R.id.hint);
+            userTextView = (TextView) view.findViewById(R.id.hintGiver);
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getHintTextView() {
+            return hintTextView;
         }
+
+        public TextView getUserTextView() {
+            return userTextView;
+        }
+
     }
 
     /**
@@ -57,7 +64,8 @@ public class GuessAdapter extends RecyclerView.Adapter<GuessAdapter.ViewHolder> 
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTextView().setText(localDataSet.get(position).hint);
+        viewHolder.getHintTextView().setText(localDataSet.get(position).hint);
+        viewHolder.getUserTextView().setText(localDataSet.get(position).user);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

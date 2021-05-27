@@ -2,6 +2,7 @@ package com.example.asyncgame;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +31,13 @@ public class GuessPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess_page);
         hintDisplay = findViewById(R.id.guessList);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
-        hintDisplay.setLayoutManager(manager);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        hintDisplay.setLayoutManager(layoutManager);
         myAdapter = new GuessAdapter(allHints);
         hintDisplay.setAdapter(myAdapter);
+        /*DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(hintDisplay.getContext(),
+                LinearLayoutManager.VERTICAL);
+        hintDisplay.addItemDecoration(dividerItemDecoration); */
         getDummyData();
     }
 
