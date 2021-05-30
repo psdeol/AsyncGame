@@ -4,15 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
+
+    Fragment someFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,5 +56,11 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+
+    public void openMessages(View view) {
+        Intent intent = new Intent(this, MessagingActivity.class);
+        startActivity(intent);
+    }
 
 }
