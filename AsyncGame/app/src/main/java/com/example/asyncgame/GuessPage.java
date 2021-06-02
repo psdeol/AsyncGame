@@ -6,9 +6,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +32,7 @@ public class GuessPage extends AppCompatActivity {
     private ArrayList<HintInfo> allHints = new ArrayList<>();
     RecyclerView hintDisplay;
     GuessAdapter myAdapter;
+    String myCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +43,59 @@ public class GuessPage extends AppCompatActivity {
         hintDisplay.setLayoutManager(layoutManager);
         myAdapter = new GuessAdapter(allHints);
         hintDisplay.setAdapter(myAdapter);
-        /*DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(hintDisplay.getContext(),
-                LinearLayoutManager.VERTICAL);
-        hintDisplay.addItemDecoration(dividerItemDecoration); */
         getDummyData();
     }
+
+
+    public void onSubmitButton(android.view.View myView) {
+        EditText guessText = findViewById(R.id.actualText);
+        String enteredText = guessText.getText().toString();
+        if(this.getCurrentFocus() != null) {
+            Context context = this.getApplicationContext();
+            InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+        Log.d("myDebug", "entered text is: " + enteredText);
+        if (myCard != null  &&  enteredText != null  &&  enteredText.toLowerCase().equals(myCard.toLowerCase())) {
+            Toast.makeText(getApplicationContext(), "Correct guess!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Incorrect guess :(", Toast.LENGTH_LONG).show();
+        }
+
+        finish();
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 1000);
+    }
+
+
+    public void onSkipButton(android.view.View myView) {
+        Toast.makeText(getApplicationContext(), "Skipping guess", Toast.LENGTH_LONG).show();
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 1000);
+    }
+
 
     public void getDummyData() {
         DatabaseReference emaRef = FirebaseDatabase.getInstance().getReference("hintsTest");
         emaRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snap : snapshot.getChildren()) {
+                myCard = (String) snapshot.child("currentCard").getValue();
+                Log.d("myDebug", "my card is: " + myCard);
+                DataSnapshot hintSnapshot = snapshot.child("hints");
+                for (DataSnapshot snap : hintSnapshot.getChildren()) {
                     String hint = (String) snap.child("hint").getValue();
                     String name = (String) snap.child("user").getValue();
                     HintInfo hInfo = new HintInfo(hint, name);
@@ -62,13 +111,14 @@ public class GuessPage extends AppCompatActivity {
         });
     }
 
-    /*public void createTestData() {
+    public void createTestData() {
         DatabaseReference emaRef = FirebaseDatabase.getInstance().getReference("hintsTest");
         HintInfo[] hints = {new HintInfo("hint1", "Noah"), new HintInfo("hint2", "Prab"),
         new HintInfo("hint3", "Sam"), new HintInfo("hint4", "Ben"),
                 new HintInfo("hint5", "Billy") };
-        emaRef.setValue(Arrays.asList(hints));
-    }*/
+        emaRef.child("hints").setValue(Arrays.asList(hints));
+        emaRef.child("currentCard").setValue("tempCard");
+    }
 
 
     class HintInfo {
