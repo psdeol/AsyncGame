@@ -33,6 +33,7 @@ public class GuessPage extends AppCompatActivity {
     RecyclerView hintDisplay;
     GuessAdapter myAdapter;
     String myCard;
+    String myEmail = "email1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,21 +89,29 @@ public class GuessPage extends AppCompatActivity {
 
 
     public void getDummyData() {
-        DatabaseReference emaRef = FirebaseDatabase.getInstance().getReference("hintsTest");
+        DatabaseReference emaRef = FirebaseDatabase.getInstance().getReference("games/game1/players");
         emaRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                myCard = (String) snapshot.child("currentCard").getValue();
-                Log.d("myDebug", "my card is: " + myCard);
-                DataSnapshot hintSnapshot = snapshot.child("hints");
-                for (DataSnapshot snap : hintSnapshot.getChildren()) {
-                    String hint = (String) snap.child("hint").getValue();
-                    String name = (String) snap.child("user").getValue();
-                    HintInfo hInfo = new HintInfo(hint, name);
-                    allHints.add(hInfo);
-                    Log.d("myDebug", "hint is: " + hint + " and name is: " + name);
+                for (DataSnapshot player : snapshot.getChildren()) {
+                    String email = (String) player.child("email").getValue();
+                    if (email.equals(myEmail)) {
+                        myCard = (String) player.child("currentCardInfo/cardName").getValue();
+                        Log.d("myDebug", "my card is: " + myCard);
+                        DataSnapshot hintSnapshot = player.child("currentCardInfo/hints");
+                        for (DataSnapshot snap : hintSnapshot.getChildren()) {
+                            String hint = (String) snap.child("hint").getValue();
+                            String name = (String) snap.child("user").getValue();
+                            HintInfo hInfo = new HintInfo(hint, name);
+                            allHints.add(hInfo);
+                            Log.d("myDebug", "hint is: " + hint + " and name is: " + name);
+                        }
+                        myAdapter.notifyDataSetChanged();
+                    }
                 }
-                myAdapter.notifyDataSetChanged();
+
+
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
