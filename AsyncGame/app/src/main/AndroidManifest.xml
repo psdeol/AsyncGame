@@ -10,9 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AsyncGame">
         <activity android:name=".GuessPage" android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".Register" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AccountManager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

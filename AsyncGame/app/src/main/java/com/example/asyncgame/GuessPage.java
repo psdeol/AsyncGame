@@ -15,6 +15,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,13 +27,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
+
 public class GuessPage extends AppCompatActivity {
 
     private ArrayList<HintInfo> allHints = new ArrayList<>();
     RecyclerView hintDisplay;
     GuessAdapter myAdapter;
     String myCard;
-    String myEmail = "user-prab@email.com";
+    String myEmail = "";
     ArrayList<String> cards = new ArrayList<String>();
     int cardInd;
     private HashMap<String, String> emailToPlayer = new HashMap<>();
@@ -47,8 +52,34 @@ public class GuessPage extends AppCompatActivity {
         emailToPlayer.put("email1", "player1");
         emailToPlayer.put("email2", "player2");
         emailToPlayer.put("email3", "player3");
-        listenForNextTurn();
-        getData();
+        getEmailAndData();
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
+                "preferences", Context.MODE_PRIVATE);
+        myEmail = sharedPref.getString("email", "tempEmail");
+        Log.d("myDebug", "my email is: " + myEmail);
+    }
+
+
+    public void getEmailAndData() {
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        String userID = fAuth.getCurrentUser().getUid();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+
+        databaseReference.child("users").child(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                User user = task.getResult().getValue(User.class);
+                if (user != null) {
+                    Log.d("myDebug", "Logged in as: " + user.getUserName());
+                    Log.d("myDebug", "Email is: " + user.getUserEmail());
+                    myEmail = user.getUserEmail();
+                    getData();
+                }
+            }
+        });
     }
 
 
@@ -178,33 +209,6 @@ public class GuessPage extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-    }
-
-
-    public void listenForNextTurn() {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("games/game1/gameStatus");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Context context = getApplicationContext();
-                SharedPreferences sharedPref = context.getSharedPreferences(
-                        "preferences", Context.MODE_PRIVATE);
-                String guessOrHint = sharedPref.getString("nextTurn", "guesses");
-                String gameStatus = (String)dataSnapshot.getValue();
-                if(guessOrHint.equals(gameStatus)) {
-                    Log.d("myDebug", "can now perform " + gameStatus);
-                }
-                else {
-                    Log.d("myDebug", "still need to wait for everyone to complete their turn");
-                }
-                Log.d("myDebug", "Game status is now: " + gameStatus);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("myDebug", "The read failed: " + databaseError.getCode());
             }
         });
     }
