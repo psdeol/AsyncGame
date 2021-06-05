@@ -12,6 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static Fragment accountFragment = new AccountFragment();
+    private static Fragment homeFragment = new HomeFragment();
+    private static Fragment rulesFragment = new RulesFragment();
     private BottomNavigationView bottomNavigationView;
 
     @Override
@@ -35,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
 
                         case R.id.account:
-                            fragment = new AccountFragment();
+                            fragment = accountFragment;
                             break;
 
                         case R.id.home:
-                            fragment = new HomeFragment();
+                            fragment = homeFragment;
                             break;
 
                         case R.id.rules:
-                            fragment = new RulesFragment();
+                            fragment = rulesFragment;
                             break;
                     }
 
