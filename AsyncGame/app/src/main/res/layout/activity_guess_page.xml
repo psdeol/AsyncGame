@@ -49,13 +49,22 @@
         >
 
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Guess:  "
+            android:textSize="20dp"
+            android:textColor="@color/black"
+             />
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/guessText"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="@drawable/guess_border"
-
             >
 
 
@@ -69,14 +78,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+
+        <CheckBox
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter Guess"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:onClick="onSubmitButton"
+            android:scaleY="1.5"
+            android:scaleX="1.5"
             />
+
 
     </LinearLayout>
 

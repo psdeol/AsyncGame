@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -28,7 +30,7 @@ public class GuessPage extends AppCompatActivity {
     RecyclerView hintDisplay;
     GuessAdapter myAdapter;
     String myCard;
-    String myEmail = "email1";
+    String myEmail = "user-prab@email.com";
     ArrayList<String> cards = new ArrayList<String>();
     int cardInd;
     private HashMap<String, String> emailToPlayer = new HashMap<>();
@@ -105,13 +107,13 @@ public class GuessPage extends AppCompatActivity {
                 editor.putString("nextTurn", "hints");
                 editor.apply();
                 Log.d("myDebug", "my new pref is: " + sharedPref.getString("nextTurn", ""));
-                /*Handler handler = new Handler(Looper.getMainLooper());
+                Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         finish();
                     }
-                }, 1000);*/
+                }, 1000);
             }
 
             @Override
