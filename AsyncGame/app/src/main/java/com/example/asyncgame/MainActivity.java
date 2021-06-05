@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent intent1 = new Intent(this, GuessPage.class);
-        startActivity(intent1);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
