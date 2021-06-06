@@ -46,6 +46,7 @@ public class GameScreenActivity extends AppCompatActivity {
 
     public void openMessages(View view) {
         Intent intent = new Intent(this, MessagingActivity.class);
+        intent.putExtra("GAMENUM", getIntent().getIntExtra("GAMENUM", 0));
         startActivity(intent);
     }
 }

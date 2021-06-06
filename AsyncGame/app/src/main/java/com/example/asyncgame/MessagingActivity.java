@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +37,8 @@ public class MessagingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
+
+        gameID = "game" + getIntent().getIntExtra("GAMENUM", 0);
 
         db = FirebaseDatabase.getInstance().getReference("messages/" + gameID);
         recyclerView = findViewById(R.id.recycler);
@@ -70,7 +73,7 @@ public class MessagingActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
         String datetime = sdf.format(new Date());
 
-        String author = "TODO_AUTHOR";
+        String author = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         EditText sendText = findViewById(R.id.sendText);
         String content = sendText.getText().toString();
