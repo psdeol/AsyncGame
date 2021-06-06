@@ -9,10 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -51,17 +56,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
         Chat chat = mChat.get(position);
         holder.show_message.setText(chat.getContent());
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("users/" + chat.getAuthor());
+        db.child("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                holder.author_name.setText(String.valueOf(task.getResult().getValue()));
+            }
+        });
+
     }
 
     public int getItemCount() {return mChat.size(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView show_message;
+        public TextView author_name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //TODO
             show_message = itemView.findViewById(R.id.show_message);
+            author_name = itemView.findViewById(R.id.author_name);
         }
     }
 
