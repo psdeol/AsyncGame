@@ -57,10 +57,4 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-
-    public void openMessages(View view) {
-        Intent intent = new Intent(this, MessagingActivity.class);
-        startActivity(intent);
-    }
-
 }

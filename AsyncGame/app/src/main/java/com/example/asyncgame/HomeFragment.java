@@ -25,7 +25,4 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    public static void openMessages(View view) {
-
-    }
 }
