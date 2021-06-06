@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AsyncGame">
         <activity android:name=".GameScreenActivity"></activity>
+        <activity android:name=".MessagingActivity"></activity>
         <activity
             android:name=".GuessPage"
             android:windowSoftInputMode="adjustPan" />
