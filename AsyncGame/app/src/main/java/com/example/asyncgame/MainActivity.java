@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
 

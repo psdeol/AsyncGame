@@ -1,50 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9c0521"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="HOME"
-        android:textColor="#ffffff"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/user_greet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:enabled="false"
-        android:text="Welcome, user"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
 
     <Button
         android:id="@+id/button_new_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Game"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.149" />
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="25dp"
+        android:textSize="24dp"
+        android:text="New Game" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Your Turn"
+        android:textSize="24dp" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/button_turn_1"
+        android:layout_marginTop="15dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Game 1" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/button_turn_2"
+        android:layout_marginTop="15dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Game 2" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Waiting"
+        android:textSize="24dp" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/button_wait_1"
+        android:layout_marginTop="15dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Game 1" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/button_wait_2"
+        android:layout_marginTop="15dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Game 2" />
+
+</LinearLayout>

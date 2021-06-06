@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".GameScreenActivity">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:textSize="22dp"
+        android:text="Game "
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button_hints"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Give Hints" />
+
+    <Button
+        android:id="@+id/button_guess"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Guess Word" />
+
+    <Button
+        android:id="@+id/button_chat"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Game Chat" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Back" />
+
+</LinearLayout>
