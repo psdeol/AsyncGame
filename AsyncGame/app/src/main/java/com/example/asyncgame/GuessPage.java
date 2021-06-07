@@ -152,16 +152,12 @@ public class GuessPage extends AppCompatActivity {
 
     private void handleCorrectGuess(DatabaseReference myRef) {
 
-        cardInd += 1;
-        if (cardInd >= cards.size()) {
-            Toast.makeText(getApplicationContext(), "You have now completed the game!", Toast.LENGTH_LONG);
-        }
-        else {
-            myRef.child("players").child(emailToPlayer.get(myEmail)).child("currentCardInfo")
-                    .child("cardName").setValue(cards.get(cardInd));
-            myRef.child("players").child(emailToPlayer.get(myEmail)).child("currentCardInfo")
-                    .child("hints").setValue(null);
-        }
+        cardInd = (cardInd+1) % cards.size();
+        Log.d("myDebug", "card ind is: " + cardInd);
+        myRef.child("players").child(emailToPlayer.get(myEmail)).child("currentCardInfo")
+                .child("cardName").setValue(cards.get(cardInd));
+        myRef.child("players").child(emailToPlayer.get(myEmail)).child("currentCardInfo")
+                .child("hints").setValue(null);
 
     }
 
