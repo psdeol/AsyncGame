@@ -214,7 +214,7 @@ public class GuessPage extends AppCompatActivity {
     }
 
 
-    class HintInfo {
+    static class HintInfo {
         public String hint;
         public String user;
 

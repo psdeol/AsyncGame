@@ -42,8 +42,30 @@ public class GameScreenActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        hintsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startHints();
+            }
+        });
+
+        guessButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGuessPage();
+            }
+        });
     }
 
+    public void startHints(){
+        Intent intent = new Intent(this, Hints.class);
+        startActivity(intent);
+    }
+    public void startGuessPage(){
+        Intent intent = new Intent(this, GuessPage.class);
+        startActivity(intent);
+    }
     public void openMessages(View view) {
         Intent intent = new Intent(this, MessagingActivity.class);
         intent.putExtra("GAMENUM", getIntent().getIntExtra("GAMENUM", 0));

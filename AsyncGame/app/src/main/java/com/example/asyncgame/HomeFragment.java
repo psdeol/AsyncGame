@@ -48,6 +48,8 @@ public class HomeFragment extends Fragment {
 
         db = FirebaseDatabase.getInstance().getReference();
 
+
+        /*
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @org.jetbrains.annotations.NotNull DataSnapshot snapshot) {
@@ -75,6 +77,10 @@ public class HomeFragment extends Fragment {
         };
 
         db.addValueEventListener(postListener);
+
+
+         */
+        game1TurnButton.setVisibility(View.VISIBLE);
         game2WaitButton.setVisibility(View.VISIBLE);
 
         Button newGameButton = view.findViewById(R.id.button_new_game);

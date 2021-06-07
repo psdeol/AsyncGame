@@ -16,6 +16,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
+        <activity android:name=".Hints" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
