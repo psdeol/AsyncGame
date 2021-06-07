@@ -1,7 +1,7 @@
 # AsyncGame
 To play the game demo, log in as:
-user-prab@email.com
-user-noah@email.com
+user-prab@email.com,
+user-noah@email.com, and
 user-joey@email.com
 
 All 3 users have the password "password"
