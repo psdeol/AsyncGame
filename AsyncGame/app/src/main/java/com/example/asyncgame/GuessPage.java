@@ -49,15 +49,10 @@ public class GuessPage extends AppCompatActivity {
         hintDisplay.setLayoutManager(layoutManager);
         myAdapter = new GuessAdapter(allHints);
         hintDisplay.setAdapter(myAdapter);
-        emailToPlayer.put("email1", "player1");
-        emailToPlayer.put("email2", "player2");
-        emailToPlayer.put("email3", "player3");
+        emailToPlayer.put("user-prab@email.com", "player1");
+        emailToPlayer.put("user-joey@email.com", "player2");
+        emailToPlayer.put("user-noah@email.com", "player3");
         getEmailAndData();
-
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
-                "preferences", Context.MODE_PRIVATE);
-        myEmail = sharedPref.getString("email", "tempEmail");
-        Log.d("myDebug", "my email is: " + myEmail);
     }
 
 
@@ -164,8 +159,8 @@ public class GuessPage extends AppCompatActivity {
         else {
             myRef.child("players").child(emailToPlayer.get(myEmail)).child("currentCardInfo")
                     .child("cardName").setValue(cards.get(cardInd));
-            //myRef.child("players").child(emailToPlayer.get(myEmail)).child("currentCardInfo")
-            //        .child("hints").setValue(null);
+            myRef.child("players").child(emailToPlayer.get(myEmail)).child("currentCardInfo")
+                    .child("hints").setValue(null);
         }
 
     }

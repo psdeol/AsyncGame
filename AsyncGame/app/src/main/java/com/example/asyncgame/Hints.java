@@ -70,8 +70,8 @@ public class Hints extends AppCompatActivity {
             }
         });
 
-        playerNo = 1;
-        updateView();
+        //playerNo = 1;
+        //updateView();
 
     }
 
@@ -91,6 +91,8 @@ public class Hints extends AppCompatActivity {
                 User user = task.getResult().getValue(User.class);
                 if (user != null) {
                     userName=user.getUserName();
+                    playerNo = 1;
+                    updateView();
                 }
             }
         });
